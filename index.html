@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediMate - Your Smart Health Companion</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="top">
+    <a href="#home" class="brand" aria-label="MediMate home">
+      <span class="brand-icon">💊</span> MediMate
+    </a>
+    <div class="tools">
+      <button id="smaller" aria-label="Make text smaller">A-</button>
+      <button id="bigger" aria-label="Make text bigger">A+</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="view">
+      <div class="welcome-box">
+        <h1 id="greeting">Hello</h1>
+        <p class="subtitle">Your personal health and medication assistant</p>
+      </div>
+      <div id="nextDose" class="banner">Loading your medicines...</div>
+      <div class="menu">
+        <a class="big cyan" href="#meds"><span class="icon">💊</span> Medicines & Reminders</a>
+        <a class="big yellow" href="#move"><span class="icon">🧘</span> Exercise and Yoga</a>
+        <a class="big pink" href="#scan"><span class="icon">📷</span> Scan a Medicine</a>
+        <a class="big white" href="#tips"><span class="icon">💡</span> Daily Health Tip</a>
+      </div>
+    </section>
+
+    <!-- MEDICINES -->
+    <section id="meds" class="view" hidden>
+      <h1>My Medicines</h1>
+      <div class="row">
+        <button id="enableAlerts" class="big yellow small">🔔 Turn on alerts and sound</button>
+      </div>
+      <ul id="medList" class="cards"></ul>
+      <form id="medForm" class="panel">
+        <h2>Add a new medicine</h2>
+        <label>Medicine Name <input id="medName" placeholder="e.g. Aspirin" required maxlength="80" autocomplete="off"></label>
+        <label>Dose <input id="medDose" placeholder="e.g. 1 tablet" maxlength="80" autocomplete="off"></label>
+        <label>Time <input id="medTime" type="time" required></label>
+        <button class="big cyan" type="submit">Save Medicine</button>
+        <p id="medMsg" role="status" class="form-msg"></p>
+      </form>
+    </section>
+
+    <!-- EXERCISE AND YOGA -->
+    <section id="move" class="view" hidden>
+      <h1>Exercise and Yoga</h1>
+      <ul id="moveList" class="cards"></ul>
+      <div id="session" class="panel" hidden>
+        <h2 id="sessionTitle"></h2>
+        <div id="timerDisplay" class="timer">05:00</div>
+        <div class="row">
+          <button id="timerStart" class="big cyan small">Start Session</button>
+          <button id="timerStop" class="big white small">Reset</button>
+        </div>
+        <ol id="sessionSteps"></ol>
+        <p class="note">⚠️ Check with your doctor before starting a new exercise routine. Stop immediately if you feel pain or dizziness.</p>
+      </div>
+    </section>
+
+    <!-- SCAN -->
+    <section id="scan" class="view" hidden>
+      <h1>Scan a Medicine</h1>
+      <div class="panel">
+        <p class="note-text">Take a clear photo of the box, bottle, or strip in good lighting.</p>
+        <label class="big pink file">
+          <span>📷 Take or Choose Photo</span>
+          <input id="photo" type="file" accept="image/*" capture="environment" hidden>
+        </label>
+        <img id="preview" alt="Your medicine photo preview" hidden>
+        <button id="scanBtn" class="big cyan" hidden>Read This Medicine</button>
+        <div id="scanOut" class="result" role="status" aria-live="polite"></div>
+        <button id="speakBtn" class="big white small" hidden>🔊 Read out loud</button>
+        <p class="note">ℹ️ Informational use only, not professional medical advice. AI can make mistakes. Always verify with your doctor or pharmacist.</p>
+      </div>
+    </section>
+
+    <!-- TIPS -->
+    <section id="tips" class="view" hidden>
+      <h1>Today's Health Tip</h1>
+      <div class="panel tip-panel">
+        <p id="tipText" class="tip"></p>
+        <div class="row">
+          <button id="tipNext" class="big yellow small">✨ Another Tip</button>
+          <button id="tipSpeak" class="big white small">🔊 Read Out Loud</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ALARM OVERLAY -->
+  <div id="alarm" class="overlay" hidden role="alertdialog" aria-labelledby="alarmText">
+    <div class="alarmBox">
+      <div class="alarm-icon">⏰</div>
+      <div id="alarmText"></div>
+      <div class="alarm-actions">
+        <button id="alarmTaken" class="big cyan">I Took It</button>
+        <button id="alarmSnooze" class="big yellow">Remind Me in 10 Mins</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/life.js"></script>
+</body>
+</html>
